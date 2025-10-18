@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Launch your program
+blueberry &
+
+# Get the window ID of your program
+window_id=$(xdotool search --sync --onlyvisible --class "Blueberry.py")
+
+# Move and resize the window
+bspc node $window_id -t floating
+
+

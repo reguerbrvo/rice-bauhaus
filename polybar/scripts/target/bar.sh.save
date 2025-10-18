@@ -1,0 +1,9 @@
+#! /bin/bash -e
+
+CONTENT=$(cat /home/marseille/.config/polybar/scripts/target/ip.txt)
+if [ -s /home/marseille/.config/polybar/scripts/target/ip.txt ]; then
+	echo "%{F#e55252}󰯐  %{F#ffffff}$CONTENT"
+else
+	echo "%{F#e55252}󰯐 No target"
+
+fi

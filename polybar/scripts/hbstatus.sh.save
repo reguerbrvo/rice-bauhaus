@@ -1,0 +1,8 @@
+#! /bin/bash
+
+IFACE=$(/usr/bin/ifconfig | grep "tun0" | awk '{print $1}' | tr -d ':')
+if [ "$IFACE" = "tun0" ]; then
+	echo "%{F#e55252}󰓾  %{F#ffffff}$(/usr/bin/ifconfig tun0 | grep "inet " | awk '{print $2}')%{u-}"
+else
+	echo "%{F#e55252}󰓾 %{u-} Disconnected"
+fi 

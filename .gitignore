@@ -1,0 +1,15 @@
+# runtime / caches
+.cache/
+*.swp
+.DS_Store
+
+# secrets
+*.pem
+*.key
+*.secret
+.env
+secrets/
+
+# editor / OS
+.vscode/
+.idea/

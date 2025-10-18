@@ -1,0 +1,7 @@
+#! /bin/bash
+
+if [ "$1" = "-r" ]; then
+  >~/.config/polybar/scripts/target/ip.txt
+else
+  echo "$1" >~/.config/polybar/scripts/target/ip.txt
+fi

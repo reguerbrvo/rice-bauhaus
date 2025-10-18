@@ -1,0 +1,273 @@
+o
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	kitty
+
+# program launcher
+super + @space
+ 	/home/marseille/.config/rofi/launchers/type-1/launcher.sh	
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+###############
+# bspwm hotkeys
+###############
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }w
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
+
+
+#############
+# state/flags
+#############X
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+############
+# focus/swap
+############
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+#super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + grave
+	bspc {node} -f last
+
+# focus the last node/desktop
+super + tab
+	bspc {desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+###########
+# preselect
+###########
+
+# preselect the direction
+super + ctrl + {Right,Down,Up,Left}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#############
+# move/resize
+#############
+
+# i3 like resizing
+super + alt + h
+    /bin/sh $HOME/.config/bspwm/resize/shrinkx.sh
+super + alt + l
+    /bin/sh $HOME/.config/bspwm/resize/expandx.sh
+super + alt + j
+    /bin/sh $HOME/.config/bspwm/resize/shrinky.sh
+super + alt + k
+    /bin/sh $HOME/.config/bspwm/resize/expandy.sh
+
+# Drag floating windows
+super + Button1
+    bspc pointer -g mode=move
+
+#Move floating window
+super + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+
+#######
+#CUSTOM
+#######
+
+super + shift + f
+	firefox
+
+super + alt + c
+	google-chrome-stable
+
+super + b
+	~/BurpSuiteCommunity/BurpSuiteCommunity
+
+#Subir brillo 
+XF86MonBrightnessUp
+	/home/marseille/.config/scripts/brightnessUp.sh
+
+#Bajar brillo
+XF86MonBrightnessDown
+	/home/marseille/.config/scripts/brightnessDown.sh
+
+ 
+#Subir brillo poquito
+shift + XF86MonBrightnessUp
+	/home/marseille/.config/scripts/brightnessUpTiny.sh
+
+#Bajar brillo poquito
+shift + XF86MonBrightnessDown
+	/home/marseille/.config/scripts/brightnessDownTiny.sh
+
+
+#IRIS NIGHT
+super + shift + XF86MonBrightnessDown
+	/home/marseille/.config/scripts/IRIS_NIGHT.sh
+
+#IRIS DAY
+super + shift + XF86MonBrightnessUp
+	/home/marseille/.config/scripts/IRIS_DAY.sh
+
+#IRIS TEMP UP
+super + XF86MonBrightnessUp
+	/home/marseille/.config/scripts/temperatureUp.sh
+
+#IRIS TEMP DOWN
+super + XF86MonBrightnessDown
+	/home/marseille/.config/scripts/temperatureDown.sh
+
+
+#SPEECH TO TEXT
+super + XF86AudioMute
+	/home/marseille/nerd-dictation/./nerd-dictation end &
+
+#SPEECH TO TEXT
+super + XF86AudioLowerVolume
+	/home/marseille/nerd-dictation/./nerd-dictation begin &
+
+#Subir volumen
+XF86AudioRaiseVolume
+	/home/marseille/.config/scripts/volumeUp.sh
+#Bajar volumen
+XF86AudioLowerVolume
+	/home/marseille/.config/scripts/volumeDown.sh
+
+#Mutear volumen
+XF86AudioMute
+	amixer set Master 1+ toggle	
+
+#Pause key
+shift + XF86AudioMute
+	playerctl play-pause
+
+#Play key
+shift + XF86AudioMute
+	playerctl play-pause
+
+#Next
+ shift + XF86AudioRaiseVolume
+	playerctl next
+
+#Prev
+shift + XF86AudioLowerVolume
+	playerctl previous
+
+#Pause pods
+XF86AudioPause
+	playerctl play-pause
+
+#Play pods
+XF86AudioPlay
+	playerctl play-pause
+
+#Next pods
+XF86AudioNext
+	playerctl next
+
+#Prev pods
+XF86AudioPrev
+	playerctl previous
+
+
+#############################################################################
+
+#Change layout
+XF86WebCam
+	bsp-layout next --layouts tall,rtall,wide,rwide,even
+
+#Change OUTPUT
+XF86Launch1
+	mons -n right
+
+#POP HORARIO
+super + shift + h
+	~/.config/scripts/horario/Horario.sh
+
+#LOCK SCREEN
+super + XF86WebCam
+     /usr/local/bin/lock-on-suspend.sh
+
+#HIDE/SHOW POLYBAR
+XF86TouchpadToggle
+	/home/marseille/.config/scripts/togglePolybar.sh
+
+#rotate normal
+Print
+  xrandr --output eDP1 --rotate normal
+
+#rotate portrait
+shift + Print
+  xrandr --output eDP1 --rotate left 
+
+#rotate inverse
+super + Print
+  xrandr --output eDP1 --rotate inverted
+
+ 
+#floating keyboard
+super + XF86TouchpadToggle
+  onboard &

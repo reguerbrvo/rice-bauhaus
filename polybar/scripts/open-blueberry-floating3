@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Launch your program and wait for it to be mapped
+blueberry &
+while ! pgrep -x "$(basename $1)" > /dev/null; do sleep 0.1; done
+
+# Get the window ID of your program
+window_id=$(xdotool search --sync --onlyvisible --class "Blueberry.py")
+
+# Calculate the center of the screen
+screen_width=$(xdotool getdisplaygeometry | cut -d' ' -f1)
+screen_height=$(xdotool getdisplaygeometry | cut -d' ' -f2)
+window_width=800 # Set your desired window width
+window_height=600 # Set your desired window height
+x=$((($screen_width - $window_width) / 2))
+y=$((($screen_height - $window_height) / 2))
+
+# Move and resize the window
+bspc node $window_id -t floating
+bspc node $window_id -g $window_width'x'$window_height'+'$x'+'$y
+
+# Bring the window to the front
+bspc node $window_id -t focused
