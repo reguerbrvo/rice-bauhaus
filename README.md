@@ -1,4 +1,4 @@
-# rice-bauhaus — bspwm + polybar rice (snapshot)
+# rice-bauhaus — bspwm + polybar rice 
 
 **Status:** WIP / Prototype / Stable
 
@@ -35,8 +35,5 @@ Explain important files and where they should be symlinked.
 ## Contributing
 Short notes: open issues, PRs, how to propose visual changes.
 
-## License
-MIT (or pick a license). See `LICENSE`.
-
 ## Contact
-Your name / email / links
+Raul Reguera Bravo / reguerbrvo@gmail.com 
